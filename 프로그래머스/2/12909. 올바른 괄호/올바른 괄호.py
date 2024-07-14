@@ -1,16 +1,16 @@
 def solution(s):
     
-    stack=list()
+    stack = []
     
     for c in s:
         if c=='(':
             stack.append(c)
-        if c==')':
-            try:
-                stack.pop()
-            except IndexError:
+        else:
+            if stack == []:
                 return False
-    return len(stack)==0
-        
-
+            else:
+                stack.pop()
+                
+    if stack != []:
+        return False
     return True
