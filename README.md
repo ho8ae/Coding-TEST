@@ -1,2 +1,5 @@
 # Coding-TEST
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+자동으로 push 됩니다. 
+파이썬 언어로 1일 1코테 ing~!
+
+> 이 자료들은 JS언어 사용할 때 도움이 됩니다.
