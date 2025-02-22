@@ -1,0 +1,13 @@
+SELECT
+    NAME,
+    COUNT(*) as COUNT
+FROM   
+     ANIMAL_INS
+WHERE
+    NAME is not NULL
+GROUP BY
+    ANIMAL_INS.NAME
+HAVING
+    COUNT(*) >= 2
+ORDER BY
+    NAME
