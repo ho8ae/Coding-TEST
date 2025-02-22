@@ -1,0 +1,9 @@
+SELECT
+    ANIMAL_TYPE,
+    COUNT(ANIMAL_ID) as count
+FROM
+    ANIMAL_INS 
+GROUP BY
+    ANIMAL_TYPE = "Cat" or "Dog" 
+ORDER BY
+    ANIMAL_TYPE ASC
