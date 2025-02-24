@@ -1,28 +1,23 @@
+def is_discount(dic,start,discount):
+    
+    want_dic = dic.copy()
+    for i in range(start,start+10):
+        if discount[i] in want_dic:
+            want_dic[discount[i]] -= 1
+    
+    is_check = all(value == 0 for value in want_dic.values())
+    
+    return is_check
+
 def solution(want, number, discount):
     
-    #want 리스트 딕셔너리 변환
-    want_dict = {}
+    answer = 0
+    dis_dict = {}
     for i in range(len(want)):
-        want_dict[want[i]]=number[i]
-        
-    answer = 0 # 총 일수를 계산할 변수 초기화
-    
-    #특정일 i에 회원가입 시 할인받을 수 있는 품목 체크
+        dis_dict[want[i]] = number[i]
     
     for i in range(len(discount)-9):
-        discount_10d={} #i일 회원가입 시 할인 받는 제품 및 개수를 담을 딕셔너리
-        
-        
-        #i일 회원가입 시 할인받는 제품 및 개수로 딕셔너리 구성
-        for j in range(i,i+10):
-            if discount[j] in want_dict:
-                discount_10d[discount[j]]=discount_10d.get(discount[j],0)+1
-                
-        #할인하는 상품의 개수가 원하는 수량과 일치하면 정답 변수에 1 추가
-        
-        if discount_10d == want_dict:
-            answer +=1
-            
-    return answer
+        if is_discount(dis_dict,i,discount):
+            answer += 1
     
     return answer
