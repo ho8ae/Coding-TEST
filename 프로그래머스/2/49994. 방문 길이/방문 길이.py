@@ -1,30 +1,17 @@
-def is_valid_move(nx, ny):  # 좌표평면을 벗어나는지 체크
-    return 0 <= nx < 11 and 0 <= ny < 11
-
-def update_location(x, y, dir):  # 명령어를 통해 다음 좌표설정
-    if dir == 'U':
-        nx, ny = x, y + 1
-    elif dir == 'D':
-        nx, ny = x, y - 1
-    elif dir == 'R':
-        nx, ny = x + 1, y
-    elif dir == 'L':
-        nx, ny = x - 1, y
-    return nx, ny
-
 def solution(dirs):
-    x, y = 5, 5
-    ans = set()  # 겹치는 좌표는 1개로 처리하기 위해
-
-    for dir in dirs:  # 주어진 명령어로 움직이면서 좌표저장
-        nx, ny = update_location(x, y, dir)
-        if not is_valid_move(nx, ny):
-            continue
-        # A ~ B and B ~ A add too
-        ans.add((x, y, nx, ny))
-        ans.add((nx, ny, x, y))
-        x, y = nx, ny  # location update
-    return len(ans) // 2
-
-# 예제 호출
-print(solution("ULURRDLLU"))  # 예상 결과: 7
+    s=set() # 내가 갔던 좌표 다 저장하면 될 것 같은데 현재좌표 다음좌표 & 다음좌표 내가 간 좌표 중복X
+    d = {'U':(-1,0),
+        'D':(1,0),
+        'R':(0,1),
+        'L':(0,-1)
+        }
+    x,y = 0,0
+    
+    for dir in dirs:
+        nx,ny=  x+d[dir][0],y+d[dir][1]
+        if -5<=nx<=5 and -5<=ny<=5:
+            s.add((x,y,nx,ny))
+            s.add((nx,ny,x,y))
+            x,y=nx,ny
+    
+    return len(s)//2
