@@ -1,23 +1,23 @@
-def getAns(n, y, width, diagonal1, diagonal2):
-    ans = 0
-    # 모든 행에 대해서 퀸의 위치가 결정되었을 경우
-    if y == n:
-        ans += 1
-    else:
-        # 현재 행에서 퀸이 놓일 수 있는 모든 위치를 시도
-        for i in range(n):
-            # 해당 위치에 이미 퀸이 있는 경우, 대각선상에 퀸이 있는 경우 스킵
-            if width[i] or diagonal1[i + y] or diagonal2[i - y + n]:
-                continue
-            # 해당 위치에 퀸을 놓음
-            width[i] = diagonal1[i + y] = diagonal2[i - y + n] = True
-            # 다음 행으로 이동하여 재귀적으로 해결 가능한 경우의 수 찾기
-            ans += getAns(n, y + 1, width, diagonal1, diagonal2)
-            # 해당 위치에 놓인 퀸을 제거함
-            width[i] = diagonal1[i + y] = diagonal2[i - y + n] = False
-    return ans
+def dfs(depth):
+    global answer,N,v1,v2,v3
+    if depth == N:
+        answer +=1
+        return
 
+    for j in range(N):
+        if v1[j]==v2[depth+j]==v3[depth-j]==0:
+            v1[j]=v2[depth+j]=v3[depth-j]=1
+            dfs(depth+1)
+            v1[j]=v2[depth+j]=v3[depth-j]=0
+    
 def solution(n):
-    # getAns 함수 호출하여 해결 가능한 경우의 수 찾기
-    answer = getAns(n, 0, [False] * n, [False] * (n * 2), [False] * (n * 2))
+    global answer,N,v1,v2,v3
+    answer = 0
+    N=n
+    v1 = [0]*n
+    v2 = [0]*(n*2)
+    v3 = [0]*(n*2)
+    
+    dfs(0)
+    
     return answer
