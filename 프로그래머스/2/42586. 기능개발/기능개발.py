@@ -1,20 +1,31 @@
-import math
+def clac(p,s):
+    count = 0
+    
+    while p<100:
+        p+=s
+        count+=1
+    return count
 
 def solution(progresses, speeds):
+    
+    reply = []
     answer = []
-    n=len(progresses)
-    #각 작업의 배포 가능일 계산
-    days_left = [math.ceil((100-progresses[i])/speeds[i]) for i in range(n)]
+    for j in range(len(progresses)):
+        reply.append(clac(progresses[j],speeds[j]))
     
-    count = 0 #배포될 작업의 수 
-    max_day = days_left[0] #가장 늦게 배포될 작업의 가능일
+    left = 0
+  
+
+    while left < len(reply):
+        dekiru = 1
+        right = left + 1 
+        
+       
+        while right < len(reply) and reply[left] >= reply[right]:
+            right += 1
+            dekiru += 1
+        
+        answer.append(dekiru)
+        left = right  #
     
-    for i in range(n):
-        if days_left[i]<=max_day:
-            count+=1
-        else:
-            answer.append(count)
-            count=1
-            max_day=days_left[i]
-    answer.append(count)#마지막으로 카운트 된 작업들을 함께 배포
     return answer
