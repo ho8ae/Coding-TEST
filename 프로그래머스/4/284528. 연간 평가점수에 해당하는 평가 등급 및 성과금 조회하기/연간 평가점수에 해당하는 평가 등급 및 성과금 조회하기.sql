@@ -1,0 +1,34 @@
+-- 사원별 성과금 정보를 조회
+# 스코어 평균나누기
+WITH value AS (SELECT 
+    EMP_NO,
+    CASE 
+        WHEN AVG(SCORE) >= 96 THEN 'S'
+        WHEN AVG(SCORE) >= 90 THEN 'A'
+        WHEN AVG(SCORE) >= 80 THEN 'B'
+    ELSE 'C'
+    END AS GRADE
+        
+FROM
+    HR_GRADE
+GROUP BY
+    EMP_NO)
+    
+SELECT 
+    VALUE.EMP_NO,
+    HE.EMP_NAME,
+    VALUE.GRADE,
+    CASE
+        WHEN VALUE.GRADE = 'S' THEN HE.SAL*0.2
+        WHEN VALUE.GRADE = 'A' THEN HE.SAL*0.15
+        WHEN VALUE.GRADE = 'B' THEN HE.SAL*0.1
+        ELSE HE.SAL*0
+    END as BONUS
+FROM
+    VALUE
+JOIN
+    HR_EMPLOYEES as HE
+ON
+    VALUE.EMP_NO = HE.EMP_NO
+ORDER BY
+    VALUE.EMP_NO
