@@ -15,9 +15,9 @@ def solution(k, tangerine):
     
     
     for ten_key, ten_value in sorted_tangerine:
-        answer += ten_value
-        count += 1
-        if answer >= k:
+        k=k-ten_value
+        count +=1
+        if k <=0:
             return count
             
     
