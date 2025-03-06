@@ -1,0 +1,24 @@
+# 조회수가 가장 높은 중고거래 게시물
+# 에대한 첨부파일 경로를 조회하는 
+
+WITH GREAT_TABLE as(
+SELECT
+    *
+FROM
+    USED_GOODS_BOARD as GB
+ORDER BY
+    GB.VIEWS DESC
+LIMIT 1
+)
+
+SELECT 
+    
+    CONCAT('/home/grep/src/',GF.BOARD_ID,'/',GF.FILE_ID,GF.FILE_NAME,GF.FILE_EXT) as FILE_PATH
+FROM
+    USED_GOODS_FILE as GF
+JOIN
+    GREAT_TABLE as GT
+ON
+    GF.BOARD_ID = GT.BOARD_ID
+ORDER BY
+    GF.FILE_ID DESC
