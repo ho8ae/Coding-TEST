@@ -1,26 +1,24 @@
 def solution(n, times):
     answer = 0
     
-    left = 1
-    right = max(times)*n #n명을 최대로 받을 수 있는 시간
+    left = 0
+    right = n*max(times) # 한 창구에서 모든 사람이 가능한 최대 시간
     
     while left<=right:
-        
-        mid = (left+right)//2
-        #심사한 사람 수
-        people =  0
+        mid = (left+right) // 2
+        people = 0
         
         for time in times:
-            people += mid//time
+            people += (mid//time) #각 창구에서 타임당 가능한 사람 수 
             
             if people >= n:
                 break
         
         if people >= n:
             answer = mid
-            right = mid -1
+            right = mid - 1
         else:
-            left = mid + 1
-            
+            left = mid +1
+        
     
     return answer
